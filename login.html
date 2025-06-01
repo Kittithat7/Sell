@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>เข้าสู่ระบบแอดมิน</title>
+  <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .login-container {
+      max-width: 400px;
+      margin: 50px auto;
+      padding: 30px;
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    .login-container h1 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: var(--primary);
+    }
+    .form-group {
+      margin-bottom: 20px;
+    }
+    .form-group label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 600;
+    }
+    .form-group input {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      font-family: 'Prompt', sans-serif;
+    }
+    .login-btn {
+      width: 100%;
+      padding: 12px;
+      background-color: var(--primary);
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-family: 'Prompt', sans-serif;
+      font-size: 1em;
+      font-weight: 600;
+      transition: background-color 0.3s;
+    }
+    .login-btn:hover {
+      background-color: var(--primary-dark);
+    }
+    .error-message {
+      color: var(--danger);
+      text-align: center;
+      margin-top: 15px;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="login-container">
+    <h1>เข้าสู่ระบบแอดมิน</h1>
+    <form id="loginForm">
+      <div class="form-group">
+        <label for="username">ชื่อผู้ใช้</label>
+        <input type="text" id="username" required>
+      </div>
+      <div class="form-group">
+        <label for="password">รหัสผ่าน</label>
+        <input type="password" id="password" required>
+      </div>
+      <button type="submit" class="login-btn">เข้าสู่ระบบ</button>
+      <div id="errorMessage" class="error-message">ชื่อผู้ใช้หรือรหัสผ่านไม่ถูกต้อง</div>
+    </form>
+  </div>
+
+  <script>
+    // ข้อมูลล็อกอิน
+    const ADMIN_CREDENTIALS = {
+      username: "admin",
+      password: "admin123" // ควรเปลี่ยนรหัสผ่านนี้ในระบบจริง
+    };
+
+    document.getElementById('loginForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      const username = document.getElementById('username').value;
+      const password = document.getElementById('password').value;
+      
+      if (username === ADMIN_CREDENTIALS.username && password === ADMIN_CREDENTIALS.password) {
+        // บันทึกสถานะการล็อกอิน
+        localStorage.setItem('adminLoggedIn', 'true');
+        // ไปยังหน้าแอดมิน
+        window.location.href = 'admin.html';
+      } else {
+        // แสดงข้อความผิดพลาด
+        document.getElementById('errorMessage').style.display = 'block';
+      }
+    });
+  </script>
+</body>
+</html>
